@@ -4,12 +4,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
@@ -115,6 +117,21 @@ public class MainActivity extends Activity
         MainActivity.this.mAutoCompleteSearch.getEditableText().clear();
     }
 
+    /**
+     * Hide keyboard
+     */
+    private void hideKeyboard()
+    {
+        final View currentFocus = this.getCurrentFocus();
+
+        if (currentFocus != null)
+        {
+            ((InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(
+                            currentFocus.getWindowToken(), 0);
+        }
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after)
     {
@@ -157,5 +174,8 @@ public class MainActivity extends Activity
         this.mAddress = (String) adapterView.getItemAtPosition(position);
 
         Toast.makeText(this, "Address: " + this.mAddress, Toast.LENGTH_LONG).show();
+
+        // Force close keyboard after item clicked
+        this.hideKeyboard();
     }
 }
