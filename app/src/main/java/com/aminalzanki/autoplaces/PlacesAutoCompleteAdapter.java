@@ -34,7 +34,7 @@ public class PlacesAutoCompleteAdapter extends ArrayAdapter<String> implements F
 
     private static final String OUT_JSON = "/json";
 
-    private static final String API_KEY = "AIzaSyCG4UHB1W0-ZTFWYSYq4iAZoBg45hia_YQ";
+    private static final String API_KEY = "YOUR_PLACES_API_KEY";
 
     private static final String ADDRESS = "";
 
